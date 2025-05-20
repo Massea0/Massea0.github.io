@@ -1,0 +1,1035 @@
+/* style.css - Custom Styles for Arcadis Website */
+
+/* Importation des polices Google */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap'); /* Font pour la nouvelle section de défilement */
+
+/* Variables CSS globales */
+:root {
+    --arcadis-blue-deep: #051620;
+    --arcadis-blue-medium: #072635;
+    --arcadis-blue-light: #0A3845;
+    --arcadis-accent: #a0d8ef; /* Bleu clair Arcadis */
+    --arcadis-secondary-accent: #ff8c00; /* Orange pour contraste et CTA importants */
+    --arcadis-text-light: #f0f8ff; /* AliceBlue, très clair */
+    --arcadis-text-medium: #cbd5e1; /* Slate 300, pour texte moins important */
+    --arcadis-text-dark: #1e293b; /* Slate 800, pour texte sur fond clair si besoin */
+    --arcadis-font-body: 'Poppins', sans-serif;
+    --arcadis-font-heading: 'Inter', sans-serif;
+    --arcadis-accent-hover-shadow: rgba(160, 216, 239, 0.25); /* Ombre portée pour accent */
+    --arcadis-secondary-accent-hover-shadow: rgba(255, 140, 0, 0.25); /* Ombre portée pour accent secondaire */
+}
+
+/* Styles de base */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--arcadis-font-body);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+    overflow-x: hidden; /* Empêche le défilement horizontal */
+    background-color: var(--arcadis-blue-deep);
+    color: var(--arcadis-text-light);
+}
+
+/* Barre de défilement personnalisée */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--arcadis-blue-medium);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--arcadis-accent);
+    border-radius: 5px;
+    border: 2px solid var(--arcadis-blue-medium);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #ffffff;
+}
+
+/* Style de la barre de navigation */
+#navbar {
+    transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out, padding 0.3s ease-in-out;
+}
+
+#navbar.scrolled {
+    background-color: rgba(5, 22, 32, 0.88);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.logo-svg-navbar {
+    height: 70px; /* Logo navbar reduced from 110px */
+    width: auto;
+    filter: drop-shadow(0 0 8px rgba(160, 216, 239, 0.7));
+    transition: transform 0.3s ease;
+}
+
+.logo-svg-navbar:hover {
+    transform: scale(1.05);
+}
+
+#navbar a.nav-link {
+    font-family: var(--arcadis-font-heading);
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+#navbar a.nav-link.active {
+    color: var(--arcadis-accent);
+    font-weight: 700;
+    position: relative;
+}
+
+#navbar a.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2.5px;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--arcadis-accent);
+    transition: width 0.3s ease-in-out;
+    border-radius: 1px;
+}
+
+#navbar a.nav-link:hover::after,
+#navbar a.nav-link.active::after {
+    width: 100%;
+}
+
+#mobile-menu a.nav-link-mobile {
+    font-family: var(--arcadis-font-heading);
+}
+
+/* États initiaux pour les animations GSAP */
+.g-fade-in,
+.g-fade-up, .g-fade-down, .g-fade-left, .g-fade-right,
+.g-scale-in,
+.hero-blob, /* Conservé au cas où, mais remplacé par .hero-interactive-blob */
+.decorative-shape {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.g-fade-up {
+    transform: translateY(60px);
+}
+
+.g-fade-down {
+    transform: translateY(-60px);
+}
+
+.g-fade-left {
+    transform: translateX(60px);
+}
+
+.g-fade-right {
+    transform: translateX(-60px);
+}
+
+.g-scale-in {
+    transform: scale(0.8);
+}
+
+/* Style général des sections */
+main > section:not(#scrolling-solutions-section):not(#hero) { /* Exclure hero car il a un overflow:hidden spécifique */
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 120px;
+    padding-bottom: 100px;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden; /* Pour contenir les formes décoratives animées */
+}
+
+main > section#scrolling-solutions-section {
+    min-height: 100vh;
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+    box-sizing: border-box;
+    position: relative;
+    background: var(--arcadis-blue-deep);
+    color: var(--arcadis-text-light);
+    font-family: 'Geist', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Section Hero */
+#hero {
+    padding-top: 0;
+    min-height: 100vh; /* Hauteur minimale de la fenêtre */
+    width: 100vw; /* Pleine largeur de la fenêtre */
+    background-color: #0e100f;
+    display: flex;
+    flex-direction: column; /* Pour empiler le contenu et le conteneur de blobs */
+    align-items: center;
+    justify-content: center;
+    position: relative; /* Important pour le positionnement absolu des enfants et le pinning */
+    overflow: visible; /* Changed from hidden to allow plane to fly out */
+}
+
+.section-supertitle {
+    font-family: var(--arcadis-font-heading);
+    color: var(--arcadis-accent);
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.75rem;
+}
+
+.section-title {
+    font-family: var(--arcadis-font-heading);
+}
+
+.section-title .highlight {
+    color: var(--arcadis-accent);
+    text-shadow: 0 0 5px var(--arcadis-accent-hover-shadow), 0 0 10px var(--arcadis-accent-hover-shadow);
+}
+
+.section-subtitle {
+    font-family: var(--arcadis-font-body);
+    line-height: 1.75;
+}
+
+#hero .container { /* Le conteneur de texte reste centré et avec des marges */
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    width: 100%;
+    max-width: 1280px; /* ou une autre valeur max pour le contenu textuel */
+    padding-left: 1rem; /* Tailwind sm:px-6 lg:px-8 */
+    padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+    #hero .container {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    #hero .container {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+}
+
+
+.scroll-down-arrow svg {
+    animation: bounceAlpha 2.8s infinite ease-in-out;
+}
+
+@keyframes bounceAlpha {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    40% {
+        transform: translateY(-15px);
+        opacity: 0.5;
+    }
+    60% {
+        transform: translateY(-7px);
+        opacity: 0.75;
+    }
+}
+
+.hero-main-logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    z-index: 10;
+}
+
+.hero-main-logo {
+    width: 320px; /* Logo Hero agrandi */
+    height: auto;
+    max-width: 80%;
+    filter: drop-shadow(0px 5px 15px rgba(160, 216, 239, 0.4));
+    opacity: 0.9;
+}
+
+#svg-stage-wrapper {
+    position: absolute; /* Reste absolu pour se superposer */
+    top: 0;
+    left: 0; /* Prend toute la largeur/hauteur du parent #hero */
+    width: 100%;
+    height: 100%;
+    display: block;
+    /* z-index est géré dynamiquement dans le HTML pour être au-dessus des blobs */
+}
+
+#svg-stage {
+    width: 80vw; /* Ajusté pour mieux s'adapter à différentes tailles d'écran */
+    height: 80vh;
+    max-width: 1000px; /* Augmenté légèrement */
+    max-height: 700px; /* Augmenté légèrement */
+    overflow: visible;
+    opacity: 0;
+}
+
+/* Styles pour les blobs interactifs du Hero */
+.hero-interactive-blob-container {
+    pointer-events: none; /* Pour ne pas interférer avec les clics */
+}
+
+.hero-interactive-blob {
+    position: absolute;
+    border-radius: 50%;
+    background-color: rgba(160, 216, 239, 0.1); /* Couleur accent très transparente */
+    opacity: 0; /* Géré par GSAP */
+    will-change: transform, opacity;
+    box-shadow: 0 0 15px rgba(160, 216, 239, 0.2), 0 0 30px rgba(160, 216, 239, 0.1);
+}
+
+/* Tailles et positions initiales variées (peuvent aussi être définies en JS) */
+.hero-interactive-blob:nth-child(1) {
+    width: 150px;
+    height: 150px;
+    top: 10%;
+    left: 15%;
+}
+
+.hero-interactive-blob:nth-child(2) {
+    width: 80px;
+    height: 80px;
+    top: 60%;
+    left: 5%;
+}
+
+.hero-interactive-blob:nth-child(3) {
+    width: 120px;
+    height: 120px;
+    top: 25%;
+    left: 70%;
+}
+
+.hero-interactive-blob:nth-child(4) {
+    width: 100px;
+    height: 100px;
+    top: 70%;
+    left: 80%;
+}
+
+.hero-interactive-blob:nth-child(5) {
+    width: 60px;
+    height: 60px;
+    top: 40%;
+    left: 45%;
+}
+
+
+/* Section Qui Sommes Nous */
+#quisommesnous {
+    background: linear-gradient(170deg, var(--arcadis-blue-deep) 0%, var(--arcadis-blue-medium) 100%);
+}
+
+#quisommesnous .quisommesnous-image {
+    border-radius: 0.75rem;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2), 0 0 20px var(--arcadis-accent-hover-shadow);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+#quisommesnous .quisommesnous-image:hover {
+    transform: scale(1.03) rotate(-1deg);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25), 0 0 30px var(--arcadis-accent-hover-shadow);
+}
+
+#quisommesnous .mission-vision-histoire h3 {
+    font-family: var(--arcadis-font-heading);
+    color: var(--arcadis-accent);
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-top: 1.75rem;
+    margin-bottom: 0.85rem;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+#quisommesnous .mission-vision-histoire h3::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: var(--after-width, 0px); /* Contrôlé par GSAP */
+    height: 3px;
+    background-color: var(--arcadis-secondary-accent);
+    border-radius: 2px;
+    transition: width 0.4s ease;
+}
+
+#quisommesnous .bg-\[\--arcadis-blue-light\] {
+    border-left: 5px solid var(--arcadis-secondary-accent);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+#quisommesnous .bg-\[\--arcadis-blue-light\]:hover {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2), 0 0 15px var(--arcadis-secondary-accent-hover-shadow);
+    transform: translateY(-5px);
+}
+
+
+/* Section Offres (Services) */
+#nosoffres {
+    background-color: var(--arcadis-blue-medium);
+    overflow: visible;
+}
+
+.offre-card {
+    background-color: var(--arcadis-blue-light);
+    border: 1px solid var(--arcadis-blue-deep);
+    border-radius: 0.75rem;
+    padding: 2rem;
+    box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.25), 0 8px 15px -10px rgba(0, 0, 0, 0.25);
+    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.offre-card::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(160, 216, 239, 0.15) 0%, rgba(160, 216, 239, 0) 70%);
+    transform: scale(0);
+    transition: transform 0.6s ease, opacity 0.6s ease;
+    opacity: 0;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.offre-card:hover::before {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.offre-card > * {
+    position: relative;
+    z-index: 1;
+}
+
+.offre-card:hover {
+    transform: translateY(-15px) perspective(1200px) rotateX(3deg) rotateY(-3deg);
+    box-shadow: 0 25px 45px -15px rgba(0, 0, 0, 0.35), 0 18px 25px -12px rgba(0, 0, 0, 0.3), 0 0 35px var(--arcadis-accent-hover-shadow);
+}
+
+.offre-card .package-name {
+    font-family: var(--arcadis-font-heading);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--arcadis-accent);
+    margin-bottom: 0.75rem;
+}
+
+.offre-card .target-audience {
+    font-style: italic;
+    color: var(--arcadis-text-medium);
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.offre-card .description {
+    color: var(--arcadis-text-light);
+    margin-bottom: 1.25rem;
+    flex-grow: 1;
+    font-size: 0.95rem;
+    line-height: 1.65;
+}
+
+.offre-card .services-cles-title {
+    font-family: var(--arcadis-font-heading);
+    font-weight: 600;
+    color: var(--arcadis-text-light);
+    margin-bottom: 0.75rem;
+    font-size: 1.15rem;
+}
+
+.offre-card ul {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 1.5rem;
+}
+
+.offre-card ul li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 0.65rem;
+    color: var(--arcadis-text-medium);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    opacity: 0;
+    transform: translateX(-20px);
+}
+
+.offre-card ul li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.5em;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 6px;
+    background-color: var(--arcadis-accent);
+    border-radius: 50%;
+    opacity: 0.8;
+    transition: background-color 0.3s ease;
+}
+
+.offre-card:hover ul li::before {
+    background-color: var(--arcadis-secondary-accent);
+}
+
+.offre-card .cta-button-secondary {
+    margin-top: auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+    font-size: 0.9rem;
+    min-height: 44px;
+}
+
+.offre-card .cta-button-secondary .arrow-icon {
+    display: inline-block;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    font-size: 1.3em;
+    line-height: 1;
+    opacity: 0.7;
+}
+
+.offre-card .cta-button-secondary:hover .arrow-icon {
+    transform: translateX(6px) scale(1.1);
+    opacity: 1;
+}
+
+.pricing-model-note {
+    background-color: var(--arcadis-blue-light);
+    padding: 1.75rem;
+    border-radius: 0.5rem;
+    border-left: 5px solid var(--arcadis-accent);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pricing-model-note:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15), 0 0 10px var(--arcadis-accent-hover-shadow);
+}
+
+/* Section Expertise */
+#expertise {
+    background: linear-gradient(170deg, var(--arcadis-blue-deep) 0%, var(--arcadis-blue-medium) 60%, var(--arcadis-blue-deep) 100%);
+}
+
+.expertise-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2.25rem;
+}
+
+.expertise-item {
+    background-color: var(--arcadis-blue-light);
+    padding: 2rem;
+    border-radius: 0.5rem;
+    transition: transform 0.35s ease, box-shadow 0.35s ease, background-color 0.35s ease;
+    border-left: 4px solid var(--arcadis-accent);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+}
+
+.expertise-item:hover {
+    transform: translateY(-10px) scale(1.01);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15), 0 0 20px var(--arcadis-accent-hover-shadow);
+    background-color: var(--arcadis-blue-deep);
+}
+
+.expertise-item .expertise-icon {
+    margin-bottom: 1.25rem;
+    display: inline-block;
+}
+
+.expertise-item .expertise-icon svg {
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.3s ease;
+    color: var(--arcadis-accent);
+}
+
+.expertise-item:hover .expertise-icon svg {
+    transform: rotate(-10deg) scale(1.2);
+    color: var(--arcadis-secondary-accent);
+}
+
+.expertise-item h4 {
+    font-family: var(--arcadis-font-heading);
+    font-size: 1.35rem;
+    color: var(--arcadis-text-light);
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+}
+
+.expertise-item p {
+    font-size: 0.95rem;
+    color: var(--arcadis-text-medium);
+    line-height: 1.65;
+}
+
+/* Section Équipe */
+#equipe {
+    background-color: var(--arcadis-blue-medium);
+}
+
+.team-member-card {
+    background-color: var(--arcadis-blue-light);
+    border-radius: 0.75rem;
+    padding: 2.25rem;
+    text-align: center;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+    overflow: hidden;
+    position: relative;
+}
+
+.team-member-card:hover {
+    transform: translateY(-12px) scale(1.03);
+    box-shadow: 0 18px 35px rgba(0, 0, 0, 0.22), 0 0 30px var(--arcadis-accent-hover-shadow);
+}
+
+.team-member-card .team-image-wrapper {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin: 0 auto 1.75rem auto;
+    border: 5px solid var(--arcadis-accent);
+    overflow: hidden;
+    position: relative;
+}
+
+.team-member-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(20%);
+    transition: filter 0.4s ease, transform 0.4s ease;
+}
+
+.team-member-card:hover img {
+    filter: grayscale(0%);
+    transform: scale(1.1);
+}
+
+.team-member-card .member-name {
+    font-family: var(--arcadis-font-heading);
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--arcadis-text-light);
+    margin-bottom: 0.3rem;
+}
+
+.team-member-card .member-role {
+    font-family: var(--arcadis-font-heading);
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--arcadis-accent);
+    margin-bottom: 1.25rem;
+    letter-spacing: 0.025em;
+}
+
+.team-member-card .member-bio {
+    font-size: 0.9rem;
+    color: var(--arcadis-text-medium);
+    line-height: 1.7;
+}
+
+/* Section Pourquoi Nous Choisir */
+#pourquoi {
+    background: var(--arcadis-blue-deep);
+}
+
+#pourquoi ul li {
+    background-color: var(--arcadis-blue-light);
+    padding: 1.25rem 1.75rem;
+    border-radius: 0.375rem;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.08);
+    transition: transform 0.25s ease-out, background-color 0.25s ease-out, border-left-color 0.25s ease-out;
+    border-left: 4px solid var(--arcadis-accent);
+    position: relative;
+    padding-left: 2.5rem;
+    opacity: 0;
+    transform: translateX(-30px);
+}
+
+#pourquoi ul li::before {
+    content: '';
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    width: 8px;
+    height: 8px;
+    background-color: var(--arcadis-accent);
+    border-radius: 2px;
+    transform: translateY(-50%) rotate(45deg) scale(0);
+    opacity: 0;
+    transition: transform 0.4s ease 0.1s, background-color 0.3s ease, opacity 0.4s ease 0.1s;
+}
+
+#pourquoi ul li.is-visible::before {
+    transform: translateY(-50%) rotate(45deg) scale(1);
+    opacity: 0.9;
+}
+
+#pourquoi ul li:hover {
+    transform: translateX(8px) scale(1.01);
+    background-color: var(--arcadis-blue-deep);
+    border-left-color: var(--arcadis-secondary-accent);
+}
+
+#pourquoi ul li:hover::before {
+    background-color: var(--arcadis-secondary-accent);
+    transform: translateY(-50%) rotate(45deg) scale(1.2);
+}
+
+/* Styles des CTA (Call To Action buttons) */
+.cta-button {
+    font-family: var(--arcadis-font-heading);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    will-change: transform, box-shadow;
+    padding: 0.8rem 1.8rem;
+    font-size: 1rem;
+    font-weight: 600;
+    display: inline-block;
+    text-align: center;
+}
+
+.cta-button:hover {
+    transform: translateY(-4px) scale(1.04);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.22), 0 0 30px var(--arcadis-accent-hover-shadow);
+}
+
+.cta-button.bg-\[\--arcadis-accent\]:hover,
+.cta-button.bg-\[\--arcadis-secondary-accent\]:hover {
+    filter: brightness(1.1);
+}
+
+.cta-button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -120%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0) 100%);
+    transform: skewX(-25deg);
+    transition: left 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.cta-button:hover::before {
+    left: 120%;
+}
+
+.cta-button-secondary {
+    border: 2px solid var(--arcadis-accent);
+    color: var(--arcadis-accent);
+    background-color: transparent;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-button-secondary:hover {
+    background-color: var(--arcadis-accent);
+    color: var(--arcadis-blue-deep);
+    border-color: var(--arcadis-accent);
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.18), 0 0 20px var(--arcadis-accent-hover-shadow);
+}
+
+.cta-button-secondary .arrow-icon {
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    margin-left: 0.3em;
+    font-weight: bold;
+}
+
+.cta-button-secondary:hover .arrow-icon {
+    opacity: 1;
+    transform: translateX(0px);
+}
+
+/* Icônes sociales du pied de page */
+.social-icon svg {
+    transition: transform 0.3s ease-in-out, fill 0.3s ease-in-out;
+}
+
+.social-icon:hover svg {
+    transform: scale(1.3) translateY(-3px);
+}
+
+.footer-logo-svg {
+    height: 40px; /* Logo footer agrandi */
+    width: auto;
+    filter: brightness(0) invert(85%) sepia(18%) saturate(2000%) hue-rotate(150deg) contrast(90%);
+    transition: filter 0.3s ease;
+}
+
+.footer-logo-svg:hover {
+    filter: brightness(0) invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) contrast(100%);
+}
+
+/* Images responsives */
+img, svg {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Écran de chargement */
+#loading-screen {
+    z-index: 200;
+}
+
+.loading-content .loading-logo {
+    animation: spinPulse 3s infinite linear;
+}
+
+@keyframes spinPulse {
+    0% {
+        transform: rotate(0deg) scale(1);
+        opacity: 0.8;
+    }
+    50% {
+        transform: rotate(180deg) scale(1.1);
+        opacity: 1;
+    }
+    100% {
+        transform: rotate(360deg) scale(1);
+        opacity: 0.8;
+    }
+}
+
+#loading-spinner-path {
+    stroke-dasharray: 180;
+    stroke-dashoffset: 180;
+    animation: drawSpinner 1.5s infinite alternate ease-in-out;
+    transform-origin: center;
+}
+
+@keyframes drawSpinner {
+    0% {
+        stroke-dashoffset: 180;
+    }
+    50% {
+        stroke-dashoffset: 40;
+        transform: rotate(180deg);
+    }
+    100% {
+        stroke-dashoffset: 180;
+        transform: rotate(360deg);
+    }
+}
+
+.loading-content h1, .loading-content p, .loading-content .progress-bar-container {
+    opacity: 0;
+    animation: fadeInText 0.8s ease-out forwards;
+}
+
+.loading-content h1 {
+    animation-delay: 0.2s;
+}
+
+.loading-content p {
+    animation-delay: 0.4s;
+}
+
+.loading-content .progress-bar-container {
+    animation-delay: 0.6s;
+}
+
+@keyframes fadeInText {
+    to {
+        opacity: 1;
+    }
+}
+
+/* Section Contact */
+#contact {
+    background: linear-gradient(170deg, var(--arcadis-blue-medium) 0%, var(--arcadis-blue-deep) 100%);
+}
+
+#contact .form-input, #contact textarea {
+    background-color: var(--arcadis-blue-deep);
+    border: 1px solid var(--arcadis-blue-medium);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#contact .form-input:focus, #contact textarea:focus {
+    border-color: var(--arcadis-accent);
+    box-shadow: 0 0 0 3px rgba(160, 216, 239, 0.4);
+    background-color: #07202c;
+}
+
+.contact-info-item svg {
+    transition: transform 0.3s ease, color 0.3s ease;
+    color: var(--arcadis-accent);
+}
+
+.contact-info-item:hover svg {
+    transform: scale(1.15) rotate(3deg);
+    color: var(--arcadis-secondary-accent);
+}
+
+#form-status.success {
+    color: #34d399;
+    background-color: rgba(16, 185, 129, 0.1);
+    border-left: 4px solid #10b981;
+    padding: 0.85rem 1.1rem;
+    border-radius: 0.375rem;
+    margin-top: 1.25rem;
+}
+
+#form-status.error {
+    color: #ef4444;
+    background-color: rgba(239, 68, 68, 0.1);
+    border-left: 4px solid #ef4444;
+    padding: 0.85rem 1.1rem;
+    border-radius: 0.375rem;
+    margin-top: 1.25rem;
+}
+
+/* Pied de page */
+footer {
+    padding-top: 3.5rem;
+    padding-bottom: 3.5rem;
+}
+
+/* Formes décoratives */
+.decorative-shape {
+    position: absolute;
+    border-radius: 50%;
+    z-index: 0;
+    pointer-events: none;
+    will-change: transform, opacity;
+    isolation: isolate;
+}
+
+.decorative-shape::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+}
+
+main > section > .container {
+    position: relative;
+    z-index: 1;
+}
+
+.shape-1 {
+    width: 220px;
+    height: 220px;
+    background: radial-gradient(circle, rgba(160, 216, 239, 0.08) 0%, rgba(160, 216, 239, 0) 70%);
+    top: 10%;
+    left: 5%;
+}
+
+.shape-2 {
+    width: 180px;
+    height: 180px;
+    background: radial-gradient(circle, rgba(160, 216, 239, 0.06) 0%, rgba(160, 216, 239, 0) 70%);
+    bottom: 15%;
+    right: 10%;
+}
+
+.shape-3 {
+    width: 120px;
+    height: 120px;
+    background: radial-gradient(circle, rgba(255, 140, 0, 0.05) 0%, rgba(255, 140, 0, 0) 70%);
+    top: 20%;
+    right: 15%;
+}
+
+#quisommesnous .mission-vision-histoire h3.animated-underline::after {
+    width: 100%;
+}
+
+.expertise-item .expertise-icon.animated-icon svg {
+    transform: scale(1) rotate(0deg);
+}
+
+#pourquoi ul li.animated-bullet::before {
+    transform: translateY(-50%) rotate(45deg) scale(1);
+    opacity: 0.9;
+}
+
+/* --- SVG Plane Animation Left Positioning --- */
+.svg-stage-left {
+    position: absolute !important;
+    left: 0;
+    /* Décalage à 33% de la hauteur de la section hero */
+    top: 33%;
+    transform: translateY(0);
+    width: 38vw;
+    min-width: 320px;
+    max-width: 520px;
+    height: auto;
+    z-index: 45; /* Increased from 1 to be above other sections but below navbar */
+    background: transparent;
+    pointer-events: none;
+    display: block;
+}
+
+@media (max-width: 900px) {
+    .svg-stage-left {
+        width: 48vw;
+        min-width: 180px;
+        max-width: 340px;
+    }
+}
+
+@media (max-width: 640px) {
+    .svg-stage-left {
+        width: 90vw;
+        min-width: 120px;
+        max-width: 100vw;
+        left: 50%;
+        /* Sur mobile, on recentre et on remet en haut */
+        transform: translate(-50%, 0);
+        top: 0;
+    }
+}

@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arcadis Tech - Transformation Numérique Stratégique au Sénégal</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/MotionPathPlugin.min.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-[--arcadis-blue-deep] text-[--arcadis-text-light] font-[var(--arcadis-font-body)] antialiased">
+
+<div id="loading-screen"
+     class="fixed inset-0 bg-[--arcadis-blue-deep] z-[200] flex items-center justify-center transition-opacity duration-500 ease-out opacity-100">
+    <div class="loading-content text-center">
+        <svg class="loading-logo w-24 h-24 md:w-32 md:h-32 text-[--arcadis-accent] mx-auto mb-6" viewBox="0 0 100 100"
+             fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M50 10C27.9086 10 10 27.9086 10 50C10 72.0914 27.9086 90 50 90C72.0914 90 90 72.0914 90 50C90 27.9086 72.0914 10 50 10ZM50 80C33.4315 80 20 66.5685 20 50C20 33.4315 33.4315 20 50 20C66.5685 20 80 33.4315 80 50C80 66.5685 66.5685 80 50 80Z"
+                  class="opacity-30" fill="currentColor"/>
+            <path id="loading-spinner-path"
+                  d="M50 10C50 10 50 10 50 10C27.9086 10 10 27.9086 10 50C10 72.0914 27.9086 90 50 90C72.0914 90 90 72.0914 90 50C90 38.0448 84.6536 27.4416 76.0576 20"
+                  stroke="currentColor" stroke-width="8" stroke-linecap="round"/>
+        </svg>
+        <h1 class="text-3xl md:text-4xl font-bold text-white mb-3 font-[var(--arcadis-font-heading)]">Arcadis<span
+                class="text-[--arcadis-accent]">Tech</span></h1>
+        <p class="text-lg text-[--arcadis-text-medium] mb-8">Chargement des solutions innovantes...</p>
+        <div class="progress-bar-container w-64 h-2 bg-[--arcadis-blue-light] rounded-full overflow-hidden mx-auto">
+            <div id="progress-bar"
+                 class="h-full bg-[--arcadis-accent] rounded-full transition-all duration-300 ease-linear"
+                 style="width: 0%;"></div>
+        </div>
+    </div>
+</div>
+
+<header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out py-2">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+        <a href="#hero" class="flex items-center space-x-3">
+            <img src="public/logo.svg" alt="Arcadis Tech Logo" class="logo-svg-navbar">
+        </a>
+        <nav class="hidden md:flex space-x-5 lg:space-x-6 items-center">
+            <a href="#hero" class="nav-link text-base hover:text-[--arcadis-accent] transition-colors duration-200">Accueil</a>
+            <a href="#quisommesnous"
+               class="nav-link text-base hover:text-[--arcadis-accent] transition-colors duration-200">Qui
+                Sommes-Nous</a>
+            <a href="#nosoffres"
+               class="nav-link text-base hover:text-[--arcadis-accent] transition-colors duration-200">Nos Offres</a>
+            <a href="#expertise"
+               class="nav-link text-base hover:text-[--arcadis-accent] transition-colors duration-200">Expertise</a>
+            <a href="#equipe" class="nav-link text-base hover:text-[--arcadis-accent] transition-colors duration-200">L'Équipe</a>
+            <a href="#pourquoi" class="nav-link text-base hover:text-[--arcadis-accent] transition-colors duration-200">Pourquoi
+                Nous</a>
+            <a href="#contact" class="nav-link text-base hover:text-[--arcadis-accent] transition-colors duration-200">Contact</a>
+            <a href="#contact"
+               class="cta-button bg-[--arcadis-accent] text-[--arcadis-blue-deep] px-5 py-2 rounded-full font-semibold hover:bg-opacity-80 transition-all duration-200 transform hover:scale-105 g-scale-in text-sm">
+                Demander un Devis
+            </a>
+        </nav>
+        <button id="mobile-menu-button"
+                class="md:hidden text-2xl text-white hover:text-[--arcadis-accent] focus:outline-none"
+                aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobile-menu">
+            &#9776;
+        </button>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden bg-[--arcadis-blue-medium] absolute top-full left-0 right-0 shadow-xl"
+         aria-hidden="true">
+        <a href="#hero"
+           class="nav-link-mobile block px-6 py-3 text-center hover:bg-[--arcadis-blue-light] transition-colors">Accueil</a>
+        <a href="#quisommesnous"
+           class="nav-link-mobile block px-6 py-3 text-center hover:bg-[--arcadis-blue-light] transition-colors">Qui
+            Sommes-Nous</a>
+        <a href="#nosoffres"
+           class="nav-link-mobile block px-6 py-3 text-center hover:bg-[--arcadis-blue-light] transition-colors">Nos
+            Offres</a>
+        <a href="#expertise"
+           class="nav-link-mobile block px-6 py-3 text-center hover:bg-[--arcadis-blue-light] transition-colors">Expertise</a>
+        <a href="#equipe"
+           class="nav-link-mobile block px-6 py-3 text-center hover:bg-[--arcadis-blue-light] transition-colors">L'Équipe</a>
+        <a href="#pourquoi"
+           class="nav-link-mobile block px-6 py-3 text-center hover:bg-[--arcadis-blue-light] transition-colors">Pourquoi
+            Nous</a>
+        <a href="#contact"
+           class="nav-link-mobile block px-6 py-3 text-center hover:bg-[--arcadis-blue-light] transition-colors">Contact</a>
+        <a href="#contact"
+           class="cta-button block px-6 py-4 text-center bg-[--arcadis-accent] text-[--arcadis-blue-deep] font-semibold m-4 rounded-full hover:bg-opacity-80 transition-colors">
+            Demander un Devis
+        </a>
+    </div>
+</header>
+
+<main>
+    <section id="hero"
+             class="min-h-screen flex flex-col items-center justify-center relative overflow-hidden pt-20 md:pt-0">
+        <div id="svg-stage-wrapper" class="svg-stage-left">
+            <svg id="svg-stage" class="svg-stage-left" xmlns="http://www.w3.org/2000/svg" viewBox="-40 -280 1250 1200"
+                 opacity="0">
+                <path class="mp" fill="none" stroke="url(#grad)" stroke-width="4"
+                      d="M-92 117.713 C 100 600, 800 850, 995 919"/>
+                <g class="plane">
+                    <path fill="url(#grad)" opacity="0.3" d="m82.8 35 215.9 94.6L79 92l3.8-57Z"/>
+                    <path fill="url(#grad)" d="m82.8 35 52-23.5 163.9 118.1-216-94.5Z"/>
+                    <path fill="url(#grad)" opacity="0.3" d="m76.8 107.1 214.4 19.6L74.7 131l2.1-23.9Z"/>
+                    <path fill="url(#grad)" d="M298.8 130.4 1.9 103.3l54-45 242.9 72.1Z"/>
+                </g>
+                <defs>
+                    <linearGradient id="grad" x1="154" x2="160" y1="49" y2="132" gradientUnits="userSpaceOnUse">
+                        <stop offset="0" stop-color="var(--arcadis-accent)"></stop>
+                        <stop offset="1" stop-color="var(--arcadis-text-light)"></stop>
+                    </linearGradient>
+                </defs>
+            </svg>
+        </div>
+
+        <div class="decorative-shape shape-1 g-fade-in"></div>
+        <div class="decorative-shape shape-2 g-fade-in"></div>
+
+        <div class="hero-main-logo-container mb-8 g-scale-in" data-delay="0.3">
+            <img src="public/logo.svg" alt="Arcadis Tech Grand Logo" class="hero-main-logo">
+        </div>
+
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center z-10 relative">
+            <p class="section-supertitle g-fade-up" data-delay="0.5">Bienvenue chez Arcadis Tech</p>
+            <h1 id="hero-title"
+                class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold mb-6 text-white g-fade-up font-[var(--arcadis-font-heading)]"
+                data-delay="0.6">
+                Accélérer Votre <span class="text-[--arcadis-accent]">Transformation Numérique</span>
+            </h1>
+            <p id="hero-subtitle"
+               class="text-lg sm:text-xl md:text-2xl text-[--arcadis-text-medium] mb-10 max-w-3xl mx-auto g-fade-up"
+               data-delay="0.7">
+                Nous simplifions la technologie pour les entreprises sénégalaises, offrant des solutions innovantes,
+                personnalisées et performantes.
+            </p>
+            <div id="hero-ctas" class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                <a href="#nosoffres"
+                   class="cta-button bg-[--arcadis-accent] text-[--arcadis-blue-deep] font-bold py-3 px-8 rounded-full text-lg hover:bg-opacity-80 transition-all duration-300 transform hover:scale-105 w-full sm:w-auto g-scale-in"
+                   data-delay="0.8">
+                    Découvrir Nos Offres
+                </a>
+                <a href="#contact"
+                   class="cta-button border-2 border-[--arcadis-accent] text-[--arcadis-accent] font-bold py-3 px-8 rounded-full text-lg hover:bg-[--arcadis-accent] hover:text-[--arcadis-blue-deep] transition-all duration-300 transform hover:scale-105 w-full sm:w-auto g-scale-in"
+                   data-delay="0.95">
+                    Parlons de Votre Projet
+                </a>
+            </div>
+        </div>
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 hidden sm:block">
+            <a href="#scrolling-solutions-section" aria-label="Faire défiler vers la suite" class="scroll-down-arrow">
+                <svg class="w-8 h-8 text-gray-400 animate-bounce" fill="none" stroke-linecap="round"
+                     stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+                    <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                </svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- Scrolling Solutions Section Removed -->
+
+    <section id="quisommesnous" class="py-16 md:py-24 relative">
+        <div class="decorative-shape shape-3 g-fade-in"></div>
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 md:mb-16">
+                <p class="section-supertitle g-fade-up">Notre Identité</p>
+                <h2 class="section-title text-3xl md:text-4xl lg:text-5xl font-bold g-fade-up">Qui <span
+                        class="highlight">Sommes-Nous</span> ?</h2>
+                <p class="section-subtitle text-lg md:text-xl text-[--arcadis-text-medium] mt-4 max-w-3xl mx-auto g-fade-up"
+                   data-delay="0.2">
+                    Arcadis Tech est une entreprise de services numériques basée à Dakar, Sénégal, spécialisée dans
+                    l'accompagnement des entreprises sénégalaises vers un avenir numérique prospère.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-center mb-12 md:mb-16">
+                <div class="g-fade-right" data-delay="0.3">
+                    <img src="https://placehold.co/600x450/072635/a0d8ef/png?text=Arcadis+Tech+Innovation"
+                         alt="Vision et innovation chez Arcadis Tech"
+                         class="rounded-xl shadow-2xl w-full object-cover aspect-video">
+                </div>
+                <div class="mission-vision-histoire g-fade-left" data-delay="0.4">
+                    <h3 class="g-fade-up">Notre Mission</h3>
+                    <p class="text-md md:text-lg text-[--arcadis-text-medium] mb-6 leading-relaxed g-fade-up"
+                       data-delay="0.1">
+                        Simplifier et accélérer la transformation numérique des entreprises au Sénégal en fournissant
+                        des solutions technologiques innovantes, personnalisées et performantes. Nous aspirons à être un
+                        partenaire de confiance, engagé dans le succès de nos clients.
+                    </p>
+                    <h3 class="g-fade-up">Notre Vision</h3>
+                    <p class="text-md md:text-lg text-[--arcadis-text-medium] mb-6 leading-relaxed g-fade-up"
+                       data-delay="0.2">
+                        Devenir le partenaire de référence au Sénégal, puis en Afrique de l'Ouest, pour la
+                        transformation numérique. Être reconnus pour notre excellence, notre capacité d'innovation et
+                        notre impact positif sur l'écosystème entrepreneurial.
+                    </p>
+                </div>
+            </div>
+            <div class="bg-[--arcadis-blue-light] p-8 md:p-12 rounded-xl shadow-xl g-fade-up" data-delay="0.5">
+                <h3 class="text-2xl md:text-3xl font-semibold mb-4 text-center text-[--arcadis-accent] font-[var(--arcadis-font-heading)] g-fade-up">
+                    Notre Histoire</h3>
+                <p class="text-md md:text-lg text-[--arcadis-text-medium] leading-relaxed text-center max-w-4xl mx-auto g-fade-up"
+                   data-delay="0.1">
+                    Fondée en 2025 par Djibril Camara et Massamba Diouf, Arcadis Tech est née d'une conviction partagée
+                    : le potentiel immense des technologies pour façonner l'avenir de l'Afrique. Forts d'expériences
+                    complémentaires acquises à l'international et d'une connaissance intime du contexte local, ils ont
+                    créé Arcadis Tech pour offrir des solutions de pointe, spécifiquement adaptées aux défis et
+                    ambitions du marché sénégalais. Notre expertise se concentre notamment sur la maîtrise des solutions
+                    Microsoft et l'intégration stratégique de l'Intelligence Artificielle.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="nosoffres" class="py-16 md:py-24 relative">
+        <div class="decorative-shape shape-1 g-fade-in"
+             style="top: 5%; right: 5%; left: auto; background: radial-gradient(circle, rgba(160, 216, 239, 0.05) 0%, rgba(160, 216, 239, 0) 70%);"></div>
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 md:mb-16">
+                <p class="section-supertitle g-fade-up">Nos Solutions</p>
+                <h2 class="section-title text-3xl md:text-4xl lg:text-5xl font-bold g-fade-up">Nos Offres <span
+                        class="highlight">Modulaires</span></h2>
+                <p class="section-subtitle text-lg md:text-xl text-[--arcadis-text-medium] mt-4 max-w-3xl mx-auto g-fade-up"
+                   data-delay="0.2">
+                    Des packages flexibles et évolutifs, conçus pour accompagner chaque étape de votre transformation
+                    numérique.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-1 lg:grid-cols-3 gap-8 md:gap-10">
+                <div class="offre-card g-fade-up flex flex-col" data-delay="0.1">
+                    <div>
+                        <h3 class="package-name">Arcadis Start</h3>
+                        <p class="target-audience">Pour les entreprises initiant leur modernisation IT.</p>
+                        <p class="description mb-4">Établissez des fondations numériques solides avec un environnement
+                            de travail moderne, sécurisé et performant, basé principalement sur Microsoft 365.</p>
+                        <h4 class="services-cles-title">Services Clés :</h4>
+                        <ul class="mb-6">
+                            <li>Déploiement & Migration Microsoft 365</li>
+                            <li>Optimisation de l'infrastructure IT</li>
+                            <li>Cybersécurité de base (MFA, gestion des accès)</li>
+                            <li>Développement/Optimisation site web (avec IA simple)</li>
+                            <li>Support helpdesk réactif</li>
+                        </ul>
+                    </div>
+                    <a href="#contact" class="cta-button-secondary text-center block w-full md:w-auto mt-auto">
+                        <span>Démarrer</span>
+                        <span class="arrow-icon">&rarr;</span>
+                    </a>
+                </div>
+
+                <div class="offre-card g-fade-up flex flex-col" data-delay="0.25">
+                    <div>
+                        <h3 class="package-name">Arcadis Plus</h3>
+                        <p class="target-audience">Pour les entreprises prêtes à innover avec l'IA.</p>
+                        <p class="description mb-4">Exploitez la puissance de l'Intelligence Artificielle pour optimiser
+                            vos processus, stimuler l'innovation et accélérer votre croissance.</p>
+                        <h4 class="services-cles-title">Services Clés :</h4>
+                        <ul class="mb-6">
+                            <li>Développement de solutions IA sur mesure</li>
+                            <li>Mise en œuvre de l'automatisation (RPA)</li>
+                            <li>Analyse de données avancée & Business Intelligence</li>
+                            <li>Formation (M365, IA Arcadis, IA générative)</li>
+                            <li>Conseil en optimisation des processus par l'IA</li>
+                        </ul>
+                    </div>
+                    <a href="#contact" class="cta-button-secondary text-center block w-full md:w-auto mt-auto">
+                        <span>Intégrer l'IA</span>
+                        <span class="arrow-icon">&rarr;</span>
+                    </a>
+                </div>
+
+                <div class="offre-card g-fade-up flex flex-col" data-delay="0.4">
+                    <div>
+                        <h3 class="package-name">Arcadis Horizon</h3>
+                        <p class="target-audience">Pour les entreprises visant l'excellence et le leadership.</p>
+                        <p class="description mb-4">Engagez-vous dans un partenariat stratégique pour une transformation
+                            digitale complète, pilotée de bout en bout pour atteindre de nouveaux sommets.</p>
+                        <h4 class="services-cles-title">Services Clés :</h4>
+                        <ul class="mb-6">
+                            <li>Stratégie & Conseil Digital (Analyse, Vision, Feuille de route)</li>
+                            <li>Mise en œuvre complète (inclut services Start & Plus)</li>
+                            <li>Cybersécurité Avancée (Audit, Politiques, Détection)</li>
+                            <li>Gestion de Projet & Accompagnement au Changement</li>
+                            <li>Expertise Complémentaire (Consultants dédiés)</li>
+                            <li>Suivi Stratégique Continu & Amélioration</li>
+                        </ul>
+                    </div>
+                    <a href="#contact" class="cta-button-secondary text-center block w-full md:w-auto mt-auto">
+                        <span>Piloter la Stratégie</span>
+                        <span class="arrow-icon">&rarr;</span>
+                    </a>
+                </div>
+            </div>
+            <div class="mt-12 md:mt-16 text-center g-fade-up pricing-model-note max-w-2xl mx-auto" data-delay="0.5">
+                <h4 class="text-xl font-semibold mb-2 text-[--arcadis-text-light] font-[var(--arcadis-font-heading)]">
+                    Modèle de Prix Flexible</h4>
+                <p class="text-[--arcadis-text-medium]">Nos services sont proposés via des portefeuilles horaires, avec
+                    un tarif modulé selon la complexité et l'envergure du package choisi (Start &lt; Plus &lt; Horizon),
+                    assurant un investissement adapté à vos ambitions.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="expertise" class="py-16 md:py-24 relative">
+        <div class="decorative-shape shape-2 g-fade-in"
+             style="top: auto; bottom: 5%; left: 8%; background: radial-gradient(circle, rgba(160, 216, 239, 0.06) 0%, rgba(160, 216, 239, 0) 70%);"></div>
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 md:mb-16">
+                <p class="section-supertitle g-fade-up">Notre Savoir-Faire</p>
+                <h2 class="section-title text-3xl md:text-4xl lg:text-5xl font-bold g-fade-up">Notre <span
+                        class="highlight">Expertise</span> à Votre Service</h2>
+                <p class="section-subtitle text-lg md:text-xl text-[--arcadis-text-medium] mt-4 max-w-3xl mx-auto g-fade-up"
+                   data-delay="0.2">
+                    Nous combinons une expertise technique pointue avec une compréhension fine du contexte local pour
+                    des résultats concrets.
+                </p>
+            </div>
+            <div class="expertise-grid">
+                <div class="expertise-item g-fade-up" data-delay="0.1">
+                    <div class="expertise-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                             stroke="currentColor" class="w-10 h-10">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                  d="M6.75 7.5l3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0021 18V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v12a2.25 2.25 0 002.25 2.25z"/>
+                        </svg>
+                    </div>
+                    <h4>Expertise Pointue</h4>
+                    <p>Spécialisation en Microsoft 365 et Intelligence Artificielle, des compétences clés pour l'avenir
+                        numérique.</p>
+                </div>
+                <div class="expertise-item g-fade-up" data-delay="0.15">
+                    <div class="expertise-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                             stroke="currentColor" class="w-10 h-10">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                  d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/>
+                        </svg>
+                    </div>
+                    <h4>Approche Personnalisée</h4>
+                    <p>Solutions sur mesure, conçues pour répondre aux besoins uniques de chaque client sénégalais.</p>
+                </div>
+                <div class="expertise-item g-fade-up" data-delay="0.2">
+                    <div class="expertise-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                             stroke="currentColor" class="w-10 h-10">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                  d="M3.75 3v11.25A2.25 2.25 0 006 16.5h12A2.25 2.25 0 0020.25 14.25V3m-16.5 0h16.5m-16.5 0H3.75m16.5 0H20.25m0 0A2.25 2.25 0 0018 5.25h-2.25m3.75 0A2.25 2.25 0 0118 5.25H6A2.25 2.25 0 013.75 3m16.5 0V1.5A2.25 2.25 0 0018 3.75h-2.25m13.5 9.75h-13.5"/>
+                        </svg>
+                    </div>
+                    <h4>Partenariat Durable</h4>
+                    <p>Nous nous engageons à bâtir des relations de confiance à long terme pour une croissance partagée
+                        et continue.</p>
+                </div>
+                <div class="expertise-item g-fade-up" data-delay="0.25">
+                    <div class="expertise-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                             stroke="currentColor" class="w-10 h-10">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                  d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                  d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/>
+                        </svg>
+                    </div>
+                    <h4>Connaissance Locale</h4>
+                    <p>Compréhension approfondie du marché, des défis et des opportunités spécifiques au Sénégal.</p>
+                </div>
+                <div class="expertise-item g-fade-up" data-delay="0.3">
+                    <div class="expertise-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                             stroke="currentColor" class="w-10 h-10">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                  d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.355a7.5 7.5 0 01-4.5 0m4.5 0v.75A2.25 2.25 0 0115 21h-5.25A2.25 2.25 0 017.5 18.75v-.75m0 0A4.501 4.501 0 0012 12.75a4.501 4.501 0 004.5 5.25m-9 0A4.501 4.501 0 0112 12.75a4.501 4.501 0 01-4.5 5.25M12 3c0 1.532 1.24 3.374 3 4.923A9.753 9.753 0 0012 3c-1.76 1.549-3 3.391-3 4.923A9.753 9.753 0 0012 3z"/>
+                        </svg>
+                    </div>
+                    <h4>Innovation & Résultats</h4>
+                    <p>Un focus constant sur des solutions qui apportent une valeur ajoutée mesurable et stimulent la
+                        performance.</p>
+                </div>
+                <div class="expertise-item g-fade-up" data-delay="0.35">
+                    <div class="expertise-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                             stroke="currentColor" class="w-10 h-10">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                  d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.518l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941"/>
+                        </svg>
+                    </div>
+                    <h4>Marché Cible Informé</h4>
+                    <p>Nous adressons les PME et Grandes Entreprises des secteurs clés (Finance, Santé, Agriculture,
+                        Télécoms, Services publics) souhaitant moderniser leur IT et intégrer les technologies avancées
+                        comme le Cloud et l'IA.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="equipe" class="py-16 md:py-24 relative">
+        <div class="decorative-shape shape-3 g-fade-in"
+             style="top: 10%; left: 10%; background: radial-gradient(circle, rgba(255, 140, 0, 0.04) 0%, rgba(255, 140, 0, 0) 70%);"></div>
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 md:mb-16">
+                <p class="section-supertitle g-fade-up">Nos Fondateurs</p>
+                <h2 class="section-title text-3xl md:text-4xl lg:text-5xl font-bold g-fade-up">L'Équipe <span
+                        class="highlight">Dirigeante</span></h2>
+                <p class="section-subtitle text-lg md:text-xl text-[--arcadis-text-medium] mt-4 max-w-3xl mx-auto g-fade-up"
+                   data-delay="0.2">
+                    Des leaders passionnés et expérimentés, unis par une vision commune pour l'Afrique numérique.
+                </p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-10 md:gap-12 lg:gap-16 items-stretch">
+                <div class="team-member-card g-fade-up flex flex-col" data-delay="0.3">
+                    <img src="https://placehold.co/280x280/0A3845/a0d8ef/png?text=Djibril+C."
+                         alt="Djibril Camara, Co-fondateur et PDG" class="self-center">
+                    <h3 class="member-name">Djibril Camara</h3>
+                    <p class="member-role">Co-fondateur et Président Directeur Général</p>
+                    <p class="member-bio text-sm">Fort d'une solide expérience en gestion stratégique et en déploiement
+                        de projets technologiques à l'échelle internationale et locale, Djibril apporte une vision
+                        claire et une direction affirmée à Arcadis Tech. Sa passion est de transformer le potentiel
+                        technologique en succès commercial tangible pour les entreprises africaines. (Résumé à compléter
+                        par vos soins)</p>
+                </div>
+                <div class="team-member-card g-fade-up flex flex-col" data-delay="0.45">
+                    <img src="https://placehold.co/280x280/0A3845/a0d8ef/png?text=Massamba+D."
+                         alt="Massamba Diouf, Co-fondateur et DT" class="self-center">
+                    <h3 class="member-name">Massamba Diouf</h3>
+                    <p class="member-role">Co-fondateur et Directeur Technique</p>
+                    <p class="member-bio text-sm">Expert reconnu des écosystèmes Microsoft et pionnier dans
+                        l'application de l'IA, Massamba est l'architecte des solutions innovantes d'Arcadis Tech. Il est
+                        animé par le défi de traduire les problématiques métiers complexes en solutions technologiques
+                        performantes et intuitives. (Résumé à compléter par vos soins)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pourquoi" class="py-16 md:py-24 relative">
+        <div class="decorative-shape shape-1 g-fade-in" style="bottom: 5%; right: 15%; top:auto; left: auto;"></div>
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 md:mb-16">
+                <p class="section-supertitle g-fade-up">Votre Avantage Concurrentiel</p>
+                <h2 class="section-title text-3xl md:text-4xl lg:text-5xl font-bold g-fade-up">Pourquoi Choisir <span
+                        class="highlight">Arcadis Tech</span> ?</h2>
+                <p class="section-subtitle text-lg md:text-xl text-[--arcadis-text-medium] mt-4 max-w-3xl mx-auto g-fade-up"
+                   data-delay="0.2">
+                    Nous sommes plus qu'un fournisseur de services; nous sommes votre partenaire stratégique pour une
+                    réussite numérique durable au Sénégal.
+                </p>
+            </div>
+            <ul class="space-y-4 md:space-y-5 max-w-3xl mx-auto">
+                <li class="g-fade-up" data-delay="0.1"><span><strong>Expertise spécialisée et rare (M365 + IA) au Sénégal :</strong> Bénéficiez d'une compétence de pointe unique sur le marché local.</span>
+                </li>
+                <li class="g-fade-up" data-delay="0.15"><span><strong>Solutions adaptées et personnalisées :</strong> Nous co-créons des solutions qui répondent précisément à vos enjeux et à votre contexte.</span>
+                </li>
+                <li class="g-fade-up" data-delay="0.2"><span><strong>Partenaire local de confiance :</strong> Une équipe ancrée dans la réalité sénégalaise, engagée à vos côtés.</span>
+                </li>
+                <li class="g-fade-up" data-delay="0.25"><span><strong>Accompagnement complet :</strong> De la stratégie initiale à la mise en œuvre, la formation et le suivi continu.</span>
+                </li>
+                <li class="g-fade-up" data-delay="0.3">
+                    <span><strong>Engagement envers les résultats et le ROI client :</strong> Votre succès est notre priorité absolue.</span>
+                </li>
+                <li class="g-fade-up" data-delay="0.35"><span><strong>Alignement avec les initiatives numériques nationales :</strong> Nous contribuons activement au "Nouveau Deal Technologique" du Sénégal.</span>
+                </li>
+            </ul>
+            <div class="text-center mt-12 md:mt-16 g-fade-up" data-delay="0.4">
+                <a href="#contact"
+                   class="cta-button bg-[--arcadis-secondary-accent] text-white font-bold py-3.5 px-10 rounded-full text-lg hover:bg-opacity-90 transition-all duration-300 transform hover:scale-105 w-full sm:w-auto g-scale-in">
+                    Discutons de Votre Avenir Numérique
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="bg-[--arcadis-blue-medium] py-16 md:py-24 relative">
+        <div class="decorative-shape shape-2 g-fade-in"
+             style="top: 20%; left: 5%; background: radial-gradient(circle, rgba(160, 216, 239, 0.04) 0%, rgba(160, 216, 239, 0) 70%);"></div>
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="section-title-wrapper text-center mb-4">
+                <p class="section-supertitle g-fade-up">Restons Connectés</p>
+                <h2 class="section-title text-3xl md:text-4xl lg:text-5xl font-bold g-fade-up">Contactez <span
+                        class="highlight">ArcadisTech</span></h2>
+            </div>
+            <p class="section-subtitle text-lg md:text-xl text-[--arcadis-text-medium] text-center mb-12 md:mb-20 max-w-3xl mx-auto g-fade-up"
+               data-delay="0.2">
+                Prêt à démarrer votre projet ou simplement curieux d'en savoir plus ? Nous sommes là pour vous aider à
+                naviguer dans le paysage numérique.
+            </p>
+
+            <div class="flex flex-col lg:flex-row gap-10 md:gap-16">
+                <div class="lg:w-2/3 contact-form-wrapper g-fade-right" data-delay="0.3">
+                    <div class="bg-[--arcadis-blue-light] p-6 sm:p-8 md:p-10 rounded-xl shadow-2xl contact-form-container h-full">
+                        <h3 class="text-2xl font-semibold text-white mb-6 font-[var(--arcadis-font-heading)]">
+                            Envoyez-nous un message</h3>
+                        <form id="contact-form" action="#" method="POST">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-6">
+                                <div class="form-group mb-5">
+                                    <label for="name"
+                                           class="block mb-2 text-sm font-medium text-[--arcadis-text-medium]">Nom
+                                        complet</label>
+                                    <input type="text" id="name" name="name" autocomplete="name"
+                                           class="form-input w-full p-3 rounded-lg bg-[--arcadis-blue-deep] border border-[--arcadis-blue-medium] focus:border-[--arcadis-accent] focus:ring-1 focus:ring-[--arcadis-accent] outline-none transition-colors"
+                                           placeholder="Votre Nom" required>
+                                </div>
+                                <div class="form-group mb-5">
+                                    <label for="email"
+                                           class="block mb-2 text-sm font-medium text-[--arcadis-text-medium]">Adresse
+                                        Email</label>
+                                    <input type="email" id="email" name="email" autocomplete="email"
+                                           class="form-input w-full p-3 rounded-lg bg-[--arcadis-blue-deep] border border-[--arcadis-blue-medium] focus:border-[--arcadis-accent] focus:ring-1 focus:ring-[--arcadis-accent] outline-none transition-colors"
+                                           placeholder="exemple@domaine.com" required>
+                                </div>
+                            </div>
+                            <div class="form-group mb-5">
+                                <label for="subject"
+                                       class="block mb-2 text-sm font-medium text-[--arcadis-text-medium]">Sujet</label>
+                                <input type="text" id="subject" name="subject" autocomplete="off"
+                                       class="form-input w-full p-3 rounded-lg bg-[--arcadis-blue-deep] border border-[--arcadis-blue-medium] focus:border-[--arcadis-accent] focus:ring-1 focus:ring-[--arcadis-accent] outline-none transition-colors"
+                                       placeholder="Objet de votre message" required>
+                            </div>
+                            <div class="form-group mb-5">
+                                <label for="message"
+                                       class="block mb-2 text-sm font-medium text-[--arcadis-text-medium]">Votre
+                                    Message</label>
+                                <textarea id="message" name="message" rows="5" autocomplete="off"
+                                          class="form-input w-full p-3 rounded-lg bg-[--arcadis-blue-deep] border border-[--arcadis-blue-medium] focus:border-[--arcadis-accent] focus:ring-1 focus:ring-[--arcadis-accent] outline-none transition-colors"
+                                          placeholder="Décrivez votre projet ou votre question..." required></textarea>
+                            </div>
+                            <button type="submit"
+                                    class="cta-button w-full bg-[--arcadis-accent] text-[--arcadis-blue-deep] font-bold py-3.5 px-6 rounded-full text-lg hover:bg-opacity-80 transition-all duration-300 transform hover:scale-105">
+                                Envoyer le Message
+                            </button>
+                            <p id="form-status" class="mt-4 text-sm text-center"></p>
+                        </form>
+                    </div>
+                </div>
+                <div class="lg:w-1/3 contact-info-wrapper g-fade-left" data-delay="0.45">
+                    <div class="bg-[--arcadis-blue-light] p-6 sm:p-8 md:p-10 rounded-xl shadow-2xl h-full">
+                        <h3 class="text-2xl font-semibold text-white mb-6 font-[var(--arcadis-font-heading)]">Nos
+                            Coordonnées</h3>
+                        <div class="space-y-5">
+                            <div class="contact-info-item flex items-start">
+                                <svg class="w-6 h-6 text-[--arcadis-accent] mr-3 mt-1 flex-shrink-0" fill="none"
+                                     stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                </svg>
+                                <div>
+                                    <h4 class="font-semibold text-white">Email</h4>
+                                    <a href="mailto:contact@arcadistech.sn"
+                                       class="text-[--arcadis-text-medium] hover:text-[--arcadis-accent] transition-colors break-all">contact@arcadistech.sn
+                                        (À compléter)</a>
+                                </div>
+                            </div>
+                            <div class="contact-info-item flex items-start">
+                                <svg class="w-6 h-6 text-[--arcadis-accent] mr-3 mt-1 flex-shrink-0" fill="none"
+                                     stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                                </svg>
+                                <div>
+                                    <h4 class="font-semibold text-white">Téléphone</h4>
+                                    <a href="tel:+221XXXXXXXXX"
+                                       class="text-[--arcadis-text-medium] hover:text-[--arcadis-accent] transition-colors">+221
+                                        XX XXX XX XX (À compléter)</a>
+                                </div>
+                            </div>
+                            <div class="contact-info-item flex items-start">
+                                <svg class="w-6 h-6 text-[--arcadis-accent] mr-3 mt-1 flex-shrink-0" fill="none"
+                                     stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                </svg>
+                                <div>
+                                    <h4 class="font-semibold text-white">Adresse</h4>
+                                    <p class="text-[--arcadis-text-medium]">Dakar, Sénégal (À compléter)</p>
+                                </div>
+                            </div>
+                            <div class="contact-info-item flex items-start">
+                                <svg class="w-6 h-6 text-[--arcadis-accent] mr-3 mt-1 flex-shrink-0" fill="none"
+                                     stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                </svg>
+                                <div>
+                                    <h4 class="font-semibold text-white">Horaires</h4>
+                                    <p class="text-[--arcadis-text-medium]">Lundi - Vendredi : 9h00 - 18h00</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="bg-[--arcadis-blue-deep] border-t border-[--arcadis-blue-light] py-10 sm:py-12">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center text-[--arcadis-text-medium]">
+        <a href="#hero" class="inline-flex items-center space-x-2 text-2xl font-bold text-[--arcadis-accent] mb-4">
+            <img src="public/logo.svg" alt="Arcadis Tech Logo" class="h-8 w-auto footer-logo-svg">
+        </a>
+        <p class="mb-4 text-sm">
+            Partenaire de votre transformation numérique au Sénégal et en Afrique de l'Ouest.
+            <br> Dakar, Sénégal.
+        </p>
+        <div class="flex justify-center space-x-6 mb-6">
+            <a href="#" aria-label="LinkedIn" class="social-icon hover:text-[--arcadis-accent] transition-colors">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                </svg>
+            </a>
+            <a href="#" aria-label="Twitter" class="social-icon hover:text-[--arcadis-accent] transition-colors">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-.422.724-.665 1.565-.665 2.454 0 1.717.87 3.229 2.198 4.105-.807-.026-1.566-.247-2.229-.616v.054c0 2.395 1.703 4.381 3.956 4.83-.413.111-.849.17-1.296.17-.314 0-.615-.03-.916-.086.631 1.953 2.445 3.377 4.604 3.417-1.69 1.319-3.829 2.105-6.147 2.105-.398 0-.79-.023-1.175-.068 2.189 1.393 4.788 2.209 7.621 2.209 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                </svg>
+            </a>
+        </div>
+        <p class="text-sm">&copy; <span id="current-year"></span> ArcadisTech. Tous droits réservés.</p>
+        <p class="text-xs mt-1">Conçu avec passion à Dakar.</p>
+    </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
