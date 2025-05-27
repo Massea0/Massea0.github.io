@@ -30,8 +30,8 @@
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center">
             <a href="#hero" class="flex items-center space-x-2">
-                <img src="public/logo.svg" alt="Arcadis Tech Logo" class="logo-svg-navbar h-9 md:h-12 w-auto">
-                <span class="text-2xl font-bold text-[--accent-primary] font-[var(--arcadis-font-heading)]">Arcadis<span class="text-[--text-primary]">Tech</span></span>
+                <img src="public/logo.png" alt="Arcadis Tech Logo" class="logo-img-navbar w-auto">
+
             </a>
             <nav class="hidden md:flex space-x-5 lg:space-x-6 items-center">
                 <a href="#hero" class="nav-link">Accueil</a>
@@ -70,11 +70,11 @@
             <img src="public/logo.svg" alt="Arcadis Tech Grand Logo" class="hero-main-logo">
         </div>
         <div class="container mx-auto text-center z-10 relative">
-            <p class="section-supertitle g-fade-up" data-delay="0.4">Prêts pour demain, dès aujourd'hui ?</p>
+            <p id="hero-supertitle" class="section-supertitle" data-delay="0.4">Prêts pour demain, dès aujourd'hui ?</p>
             <h1 id="hero-title" class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold mb-6 text-[--text-primary] font-[var(--arcadis-font-heading)]" data-delay="0.5">
                 <span class="char-title">A</span><span class="char-title">c</span><span class="char-title">c</span><span class="char-title">é</span><span class="char-title">l</span><span class="char-title">é</span><span class="char-title">r</span><span class="char-title">e</span><span class="char-title">r</span> <span class="char-title">V</span><span class="char-title">o</span><span class="char-title">t</span><span class="char-title">r</span><span class="char-title">e</span> <span class="text-[--accent-primary]"><span class="char-title">T</span><span class="char-title">r</span><span class="char-title">a</span><span class="char-title">n</span><span class="char-title">s</span><span class="char-title">f</span><span class="char-title">o</span><span class="char-title">r</span><span class="char-title">m</span><span class="char-title">a</span><span class="char-title">t</span><span class="char-title">i</span><span class="char-title">o</span><span class="char-title">n</span> <span class="char-title">N</span><span class="char-title">u</span><span class="char-title">m</span><span class="char-title">é</span><span class="char-title">r</span><span class="char-title">i</span><span class="char-title">q</span><span class="char-title">u</span><span class="char-title">e</span></span>
             </h1>
-            <p id="hero-subtitle" class="text-lg sm:text-xl md:text-2xl text-[--text-secondary] mb-10 max-w-3xl mx-auto g-fade-up" data-delay="0.6">
+            <p id="hero-subtitle" class="text-lg sm:text-xl md:text-2xl text-[--text-secondary] mb-10 max-w-3xl mx-auto" data-delay="0.6">
                 Libérez le potentiel de votre entreprise au Sénégal. Nous transformons la complexité technologique en solutions claires, innovantes et sur mesure pour votre succès.
             </p>
             <div id="hero-ctas" class="flex flex-col sm:flex-row justify-center items-center gap-4">
@@ -86,7 +86,7 @@
                 </a>
             </div>
         </div>
-        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 hidden sm:block">
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 hidden sm:block scroll-down-arrow-container">
             <a href="#quisommesnous" aria-label="Faire défiler vers la suite" class="scroll-down-arrow">
                 <svg class="w-8 h-8 text-[--text-secondary] animate-bounce" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                     <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
@@ -120,7 +120,7 @@
                     </p>
                 </div>
             </div>
-            <div class="bg-[--bg-light] p-8 md:p-12 rounded-xl shadow-lg g-fade-up" data-delay="0.5">
+            <div id="histoire-arcadis" class="bg-[var(--bg-light)] p-8 md:p-12 rounded-xl shadow-lg g-fade-up" data-delay="0.5">
                 <h3 class="text-2xl md:text-3xl font-semibold mb-4 text-center text-[--accent-primary] font-[var(--arcadis-font-heading)] g-fade-up">Notre Histoire</h3>
                 <p class="text-[--text-secondary] leading-relaxed text-center max-w-4xl mx-auto g-fade-up" data-delay="0.1">
                     Fondée en 2023, Arcadis Tech est née d'une conviction partagée : le potentiel immense des technologies pour façonner l'avenir de l'Afrique. Issue d'expériences complémentaires acquises à l'international et d'une connaissance intime du contexte local, l'entreprise a été créée pour offrir des solutions de pointe, spécifiquement adaptées aux défis et ambitions du marché sénégalais. Notre expertise se concentre notamment sur la maîtrise des solutions Microsoft et l'intégration stratégique de l'Intelligence Artificielle.
@@ -140,7 +140,7 @@
                 </p>
             </div>
             <div class="grid md:grid-cols-1 lg:grid-cols-3 gap-8 md:gap-10">
-                <div class="offre-card g-fade-up flex flex-col" data-delay="0.1">
+                <div class="offre-card g-fade-up flex flex-col" data-delay="0.1" data-offre-nom="Arcadis Start" data-offre-services="Déploiement & Migration Microsoft 365, Optimisation de l'infrastructure IT, Cybersécurité de base (MFA, gestion des accès), Développement/Optimisation site web (ex: avec chatbot initial ou optimisation de contenu assistée par IA), Support helpdesk réactif">
                     <div>
                         <h3 class="package-name">Arcadis Start</h3>
                         <p class="target-audience">Pour les entreprises initiant leur modernisation IT.</p>
@@ -154,9 +154,10 @@
                             <li>Support helpdesk réactif</li>
                         </ul>
                     </div>
-                    <a href="#contact" class="cta-button-secondary text-center block w-full md:w-auto mt-auto"><span>Poser les Fondations</span><span class="arrow-icon">&rarr;</span></a>
+                    <a href="#contact" class="cta-button-secondary text-center block w-full md:w-auto mt-auto mb-3"><span>Poser les Fondations</span><span class="arrow-icon">&rarr;</span></a>
+                    <button class="gemini-idea-button text-sm py-2 px-4 rounded-full w-full md:w-auto">✨ Idées de Projets par Secteur</button>
                 </div>
-                <div class="offre-card g-fade-up flex flex-col border-2 border-[--accent-primary] relative" data-delay="0.25">
+                <div class="offre-card g-fade-up flex flex-col border-2 border-[--accent-primary] relative" data-delay="0.25" data-offre-nom="Arcadis Plus" data-offre-services="Développement de solutions IA sur mesure, Analyse de données avancée & Business Intelligence, Formation (M365, nos approches IA Arcadis éprouvées, IA générative), Conseil en optimisation des processus par l'IA, Intégration de l'IA dans vos systèmes existants">
                     <div class="absolute top-0 right-0 bg-[--accent-primary] text-[--text-on-accent] text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-lg">Populaire</div>
                     <div>
                         <h3 class="package-name">Arcadis Plus</h3>
@@ -171,9 +172,10 @@
                             <li>Intégration de l'IA dans vos systèmes existants</li>
                         </ul>
                     </div>
-                    <a href="#contact" class="cta-button-secondary text-center block w-full md:w-auto mt-auto"><span>Passer à la Vitesse IA</span><span class="arrow-icon">&rarr;</span></a>
+                    <a href="#contact" class="cta-button-secondary text-center block w-full md:w-auto mt-auto mb-3"><span>Passer à la Vitesse IA</span><span class="arrow-icon">&rarr;</span></a>
+                    <button class="gemini-idea-button text-sm py-2 px-4 rounded-full w-full md:w-auto">✨ Idées de Projets par Secteur</button>
                 </div>
-                <div class="offre-card g-fade-up flex flex-col" data-delay="0.4">
+                <div class="offre-card g-fade-up flex flex-col" data-delay="0.4" data-offre-nom="Arcadis Horizon" data-offre-services="Stratégie & Conseil Digital (Analyse, Vision, Feuille de route), Mise en œuvre complète (inclut services Start & Plus), Cybersécurité Avancée (Audit, Politiques, Détection), Gestion de Projet & Accompagnement au Changement, Expertise Complémentaire (Consultants dédiés), Suivi Stratégique Continu & Amélioration">
                     <div>
                         <h3 class="package-name">Arcadis Horizon</h3>
                         <p class="target-audience">Pour les entreprises visant l'excellence et le leadership.</p>
@@ -188,12 +190,13 @@
                             <li>Suivi Stratégique Continu & Amélioration</li>
                         </ul>
                     </div>
-                    <a href="#contact" class="cta-button-secondary text-center block w-full md:w-auto mt-auto"><span>Viser le Sommet</span><span class="arrow-icon">&rarr;</span></a>
+                    <a href="#contact" class="cta-button-secondary text-center block w-full md:w-auto mt-auto mb-3"><span>Viser le Sommet</span><span class="arrow-icon">&rarr;</span></a>
+                    <button class="gemini-idea-button text-sm py-2 px-4 rounded-full w-full md:w-auto">✨ Idées de Projets par Secteur</button>
                 </div>
             </div>
-            <div class="mt-12 md:mt-16 text-center g-fade-up pricing-model-note max-w-2xl mx-auto" data-delay="0.5">
-                <h4 class="text-xl font-semibold mb-2 text-[--text-primary] font-[var(--arcadis-font-heading)]">Modèle de Prix Flexible</h4>
-                <p class="text-[--text-secondary]">Nos services sont proposés via des portefeuilles horaires, avec un tarif modulé selon la complexité et l'envergure du package choisi (Start &lt; Plus &lt; Horizon). Le tarif horaire reflète le niveau d'expertise et la complexité technologique spécifiques à chaque package, assurant un investissement adapté à vos ambitions.</p>
+            <div class="mt-12 md:mt-16 text-center g-fade-up pricing-model-note max-w-xl mx-auto" data-delay="0.5">
+                <h4 class="text-lg font-semibold mb-2 text-[--text-primary] font-[var(--arcadis-font-heading)]">Modèle de Prix Flexible</h4>
+                <p class="text-sm text-[--text-secondary]">Nos services sont proposés via des portefeuilles horaires, avec un tarif modulé selon la complexité et l'envergure du package choisi (Start &lt; Plus &lt; Horizon). Le tarif horaire reflète le niveau d'expertise et la complexité technologique spécifiques à chaque package, assurant un investissement adapté à vos ambitions.</p>
             </div>
         </div>
     </section>
@@ -394,6 +397,26 @@
     <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.106a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.836 17.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.864 6.106a.75.75 0 00-1.061-1.06L5.212 6.637a.75.75 0 001.061 1.06l1.59-1.591zM3 12a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5H2.25A.75.75 0 013 12zM6.637 19.363a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z" /></svg>
     <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.679.75.75 0 01.981.981A10.503 10.503 0 0112 20.25a10.5 10.5 0 01-10.5-10.5 10.503 10.503 0 013.218-7.552.75.75 0 01.818.162z" clip-rule="evenodd" /></svg>
 </button>
+
+<!-- Modal Structure (initially hidden) -->
+<div id="gemini-modal" class="fixed inset-0 bg-[--shadow-color-strong] bg-opacity-75 backdrop-blur-sm flex items-center justify-center p-4 z-[150] hidden transition-opacity duration-300 ease-in-out opacity-0">
+    <div id="gemini-modal-content" class="bg-[--bg-medium] p-6 md:p-8 rounded-xl shadow-2xl w-full max-w-lg transform scale-95 transition-all duration-300 ease-in-out">
+        <div class="flex justify-between items-center mb-4">
+            <h3 id="gemini-modal-title" class="text-xl md:text-2xl font-semibold text-[--accent-primary] font-[var(--arcadis-font-heading)]">Idées de projets</h3>
+            <button id="gemini-modal-close" class="text-[--text-secondary] hover:text-[--accent-primary] transition-colors text-2xl">&times;</button>
+        </div>
+        <div class="space-y-4">
+            <div>
+                <label for="sector-input" class="block text-sm font-medium text-[--text-secondary] mb-1">Votre secteur d'activité :</label>
+                <input type="text" id="sector-input" name="sector-input" class="form-input w-full p-2.5 rounded-md bg-[--bg-deep] border border-[--bg-light] focus:border-[--accent-primary] focus:ring-1 focus:ring-[--accent-primary] outline-none transition-colors text-[--text-primary]" placeholder="Ex: Santé, Finance, Agriculture...">
+            </div>
+            <button id="generate-ideas-button" class="cta-button bg-[--accent-primary] text-[--text-on-accent] w-full py-2.5 text-base">Générer les idées</button>
+            <div id="gemini-results-container" class="mt-4 p-4 bg-[--bg-deep] rounded-md min-h-[150px] text-[--text-secondary] text-sm leading-relaxed overflow-y-auto max-h-[300px]">
+                <p class="text-center italic">Entrez votre secteur et cliquez sur "Générer" pour voir des idées de projets.</p>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script src="script.js"></script>
 </body>
