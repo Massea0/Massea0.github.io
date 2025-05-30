@@ -1,0 +1,50 @@
+/* /Users/a00/arcadis_frontend/arcadis_space_vue/src/styles/global.css */
+:root {
+    --bg-deep: #051620;
+    --bg-medium: #072635;
+    --bg-light: #0A3845;
+    --accent-primary: #a0d8ef;
+    --accent-secondary: #ff8c00;
+    --text-primary: #f0f8ff;
+    --text-secondary: #cbd5e1;
+    --text-on-accent: #051620;
+    --arcadis-font-body: 'Poppins', sans-serif;
+    --arcadis-font-heading: 'Inter', sans-serif;
+    /* ... toutes vos autres variables ... */
+    --navbar-height: 76px; /* Assurez-vous que cette variable est définie et correspond à vos besoins */
+}
+
+body.light-mode {
+    --bg-deep: #f4f7f9;
+    --bg-medium: #ffffff;
+    /* ... toutes vos autres variables pour le light-mode ... */
+}
+
+html {
+    scroll-behavior: smooth !important;
+    scrollbar-width: thin; /* Pour Firefox */
+    scrollbar-color: var(--accent-primary) rgba(0,0,0,0.1); /* Pour Firefox */
+}
+
+body {
+    font-family: var(--arcadis-font-body);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+    background-color: var(--bg-deep);
+    color: var(--text-primary);
+    transition: background-color var(--theme-transition-duration) ease, color var(--theme-transition-duration) ease;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Styles pour la scrollbar Webkit */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: rgba(0,0,0,0.1); border-radius: 5px; margin: 2px; }
+::-webkit-scrollbar-thumb { background-color: var(--accent-primary); border-radius: 5px; border: 2px solid transparent; background-clip: content-box;}
+::-webkit-scrollbar-thumb:hover { background-color: var(--accent-secondary); }
+::-webkit-scrollbar-corner { background: transparent; }
+
+/* ... (le reste de vos styles globaux de base que vous souhaitez appliquer partout) ... */
